@@ -4,6 +4,16 @@ void main() {
   runApp(const MyApp());
 }
 
+enum ResponsiveSize {
+  small(950),
+  medium(1920),
+  large(3840),
+  extraLarge(4096);
+
+  const ResponsiveSize(this.widthBreakpoint);
+  final int widthBreakpoint;
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -38,11 +48,11 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ResponsiveWidget(size: Size.small),
+            ResponsiveWidget(),
           ],
         ),
       ),
@@ -50,23 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-enum Size {
-  small(950),
-  medium(1920),
-  large(3840),
-  extraLarge(4096);
-
-  const Size(this.widthBreakpoint);
-  final int widthBreakpoint;
-}
-
 class ResponsiveWidget extends StatelessWidget {
-  const ResponsiveWidget({super.key, required this.size});
-
-  final Size size;
+  const ResponsiveWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Text('I am a ${size.name}-sized responsive widget');
+    return Text('I am a ${ResponsiveSize.extraLarge.name}-sized responsive widget');
   }
 }
